@@ -1,0 +1,11 @@
+﻿@{
+    User user = Context.Session.GetObject<User>("usuario");
+
+}
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <br />
+    <button class="btn btn-info" id="nuevoComentario">Nuevo Comentario</button>
+    <br />
+    <br />
+}

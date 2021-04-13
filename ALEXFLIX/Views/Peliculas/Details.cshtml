@@ -1,0 +1,183 @@
+﻿@model VistaPelicula
+@{
+    Pelicula Pelicula = Model.Pelicula;
+    List<Actor> actores = Model.Actores;
+    List<ComentarioUser> comentariosUsers = Model.ComentariosUsers;
+    User usuario = new User();
+    Boolean favorita = false;
+}
+@if (Context.Session.GetObject<User>("usuario") != null)
+{
+    usuario = Context.Session.GetObject<User>("usuario");
+    favorita = (bool)ViewData["FAVORITA"];
+}
+
+<link href="~/css/ImagenPelicula.css" rel="stylesheet" />
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //CLIENTE
+            //$('#nuevoComentario').click(function () {
+            //    $('#formComentario').removeAttr('hidden');
+            //})
+
+            //$('#close').click(function () {
+            //    $('#formComentario').attr('hidden', true);
+            //    $('#divModificar').empty();
+            //});
+
+            //PARTIAL VIEW
+            $('#nuevoComentario').click(function () {
+                var idPelicula = '@Pelicula.IdPelicula';
+                $('#divModificar').load("/Peliculas/GetComentariosPartial/" + idPelicula);
+                $('#btCerrar').removeAttr('hidden');
+            });
+
+            $('#btCerrar').click(function () {
+                $('#divModificar').empty();
+                $('#btCerrar').attr('hidden', true);
+            })
+
+
+        })
+    </script>
+}
+
+<link rel="stylesheet" href="~/css/estrellas.css" />
+
+<div class="container page-top">
+    <div class="divimagen">
+        <img class="img-fluid" src="http://127.0.0.1:10000/devstoreaccount1/alexflix/images/@Pelicula.Imagen" style="width:200px; height:auto" />
+    </div>
+
+    <h1 class="display-4 text-center">@Pelicula.Titulo</h1>
+    @if (Context.Session.GetObject<User>("usuario") != null)
+    {
+        @if (favorita)
+        {
+            <form asp-action="Favorito">
+                <input type="text" name="idPelicula" value="@Pelicula.IdPelicula" hidden />
+                <input type="text" name="idUsuario" value="@usuario.IdUsuario" hidden />
+                <input type="number" name="favorito" value="1" hidden />
+                <button type="submit" class="close" aria-label="Close" id="btCorazon">
+                    <span aria-hidden="true">♥</span>
+                </button>
+            </form>
+        }
+        else
+        {
+            <form asp-action="Favorito">
+                <input type="text" name="idPelicula" value="@Pelicula.IdPelicula" hidden />
+                <input type="text" name="idUsuario" value="@usuario.IdUsuario" hidden />
+                <input type="number" name="favorito" value="0" hidden />
+                <button type="submit" class="close" aria-label="Close" id="btCorazon">
+                    <span aria-hidden="true">♡</span>
+                </button>
+            </form>
+        }
+    }
+
+    <h2>Sinopsis:</h2>
+    <p style="font-size:17px">@Pelicula.Sinopsis</p>
+
+    <h2>Genero: </h2>
+    <p style="font-size:16px">@Model.Genero</p>
+
+    @if (actores.Count > 0)
+    {
+        <h2>Actores:</h2>
+        <ul>
+            @foreach (Actor actor in actores)
+            {
+                <li>@actor.Nombre</li>
+
+            }
+        </ul>
+    }
+
+    <div class="embed-responsive embed-responsive-16by9">
+        <video class="video" src="http://127.0.0.1:10000/devstoreaccount1/alexflix/videos/@Pelicula.Video" autoplay loop />
+    </div>
+    <hr />
+
+    <div>
+        <h3>Comentarios</h3>
+        <div>
+            <partial name="_PatialBotonAddComentario" />
+        </div>
+        @*<button class="btn btn-info" id="nuevoComentario">Nuevo Comentario</button>*@
+        @*<button class="btn btn-info" id="nuevoComentarioPartial">Nuevo ComentarioPartial</button>*@
+        <hr />
+        <br />
+
+        <!-- #region FORM NUEVO COMENTARIO CLIENTE -->
+        @*<form method="post" hidden id="formComentario" asp-action="Comentario">
+                <button type="button" class="close" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <br />
+
+                <input type="number" name="idpelicula" id="typeIdPelicula" value="@Pelicula.IdPelicula" hidden />
+
+                <input type="number" hidden name="idusuario" value="@usuario.IdUsuario" />
+
+                <label>Comentario:</label>
+                <textarea class="form-control" rows="3" name="comentario"></textarea><br />
+
+                <label>Valoracion:</label>
+                <p class="clasificacion">
+                    <input id="radio1" type="radio" name="valoracion" value="5">
+                    <label for="radio1">★</label>
+
+                    <input id="radio2" type="radio" name="valoracion" value="4">
+                    <label for="radio2">★</label>
+
+                    <input id="radio3" type="radio" name="valoracion" value="3">
+                    <label for="radio3">★</label>
+
+                    <input id="radio4" type="radio" name="valoracion" value="2">
+                    <label for="radio4">★</label>
+
+                    <input id="radio5" type="radio" name="valoracion" value="1">
+                    <label for="radio5">★</label>
+                </p>
+
+                <button type="submit" class="btn btn-success">Añadir comentario</button>
+                <br />
+                <br />
+                <hr />
+                <br />
+            </form>*@
+        <!-- #endregion -->
+        @* FORMULARIO CREACION PARTIAL VIEW *@
+        <div id="divComentario">
+            <button type="button" hidden class="close" aria-label="Close" id="btCerrar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <br />
+
+            <div id="divModificar"></div>
+        </div>
+
+
+        @if (comentariosUsers != null)
+        {
+            foreach (ComentarioUser comUs in comentariosUsers)
+            {
+                <div>
+                    <h2>@comUs.Usuario.Nombre</h2>
+                    <div>
+                        <p>@comUs.Comentario.ComentarioTexto</p>
+                    </div>
+                    @*<h3>Valoracion: </h3>*@
+                    @for (int i = 0; i < comUs.Comentario.Valoracion; i++)
+                    {
+                        <label for="radio5" id="estrellafija">★</label>
+                    }
+                </div>
+                <br /><hr /><br />
+            }
+        }
+    </div>
+</div>

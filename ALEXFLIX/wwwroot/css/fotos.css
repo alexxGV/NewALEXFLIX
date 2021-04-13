@@ -1,0 +1,18 @@
+﻿img.zoom {
+    width: 400px !important;
+    height: 200px !important;
+    border-radius: 5px;
+    object-fit: cover;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+}
+
+
+    img.zoom:hover {
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+    }

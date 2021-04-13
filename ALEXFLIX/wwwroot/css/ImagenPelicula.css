@@ -1,0 +1,6 @@
+﻿.divimagen img {
+    width: 10000px !important;
+    height: 200px !important;
+    margin: 20px 0 20px 0;
+    object-fit: cover;
+}

@@ -1,0 +1,56 @@
+﻿@{
+    User user = Context.Session.GetObject<User>("usuario");
+    String usuario = "USUARIO";
+    @if (user != null)
+    {
+        usuario = user.Username;
+    }
+}
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="dropdown01"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@usuario</a>
+    <div class="dropdown-menu" aria-labelledby="dropdown01">
+
+        @if (!Context.User.Identity.IsAuthenticated)
+        {
+            <a class="dropdown-item"
+               asp-controller="Usuarios"
+               asp-action="Registro">
+                Registrarse
+            </a>
+
+            <a class="dropdown-item"
+               asp-controller="Usuarios"
+               asp-action="Perfil">
+                Login
+            </a>
+        }
+        else
+        {
+            <a class="dropdown-item"
+               asp-controller="Usuarios"
+               asp-action="Perfil">
+                Perfil
+            </a>
+            
+            <a class="dropdown-item"
+               asp-controller="Peliculas"
+               asp-action="Favoritas">
+                Favoritas
+            </a>
+
+            <a class="dropdown-item"
+               asp-controller="Usuarios"
+               asp-action="RecuperarContrasenia">
+                Cambiar Contraseña
+            </a>
+            
+            <a class="dropdown-item"
+               asp-controller="Usuarios"
+               asp-action="LogOut">
+                Cerrar Session
+            </a>
+        }
+    </div>
+</li>

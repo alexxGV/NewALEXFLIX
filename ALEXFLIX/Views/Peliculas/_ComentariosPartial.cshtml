@@ -1,0 +1,42 @@
+﻿@model Pelicula;
+
+@{ 
+    int IdPelicula = (int)ViewData["IdPelicula"];
+    User usuario = Context.Session.GetObject<User>("usuario");
+}
+
+
+<form method="post" id="formComentario" asp-action="Comentario">
+
+    <br />
+
+    <input type="number" name="idpelicula" id="typeIdPelicula" value="@IdPelicula" hidden />
+
+    <input type="number" hidden name="idusuario" value="@usuario.IdUsuario" />
+
+    <label>Comentario:</label>
+    <textarea class="form-control" rows="3" name="comentario"></textarea><br />
+
+    <label>Valoracion:</label>
+    <p class="clasificacion">
+        <input id="radio1" type="radio" name="valoracion" value="5">
+        <label for="radio1">★</label>
+
+        <input id="radio2" type="radio" name="valoracion" value="4">
+        <label for="radio2">★</label>
+
+        <input id="radio3" type="radio" name="valoracion" value="3">
+        <label for="radio3">★</label>
+
+        <input id="radio4" type="radio" name="valoracion" value="2">
+        <label for="radio4">★</label>
+
+        <input id="radio5" type="radio" name="valoracion" value="1">
+        <label for="radio5">★</label>
+    </p>
+
+    <button type="submit" class="btn btn-success">Añadir comentario</button>
+    <br />
+    <hr />
+    <br />
+</form>

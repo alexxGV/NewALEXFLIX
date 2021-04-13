@@ -1,0 +1,10 @@
+﻿@if (Context.User.Identity.IsAuthenticated)
+{
+
+    <a class="btn btn-danger"
+       asp-controller="Identity"
+       asp-action="CerrarSesion">
+        Log Out
+    </a>
+
+}

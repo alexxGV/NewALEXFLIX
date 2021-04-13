@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Perfil";
+    User usuario = Context.Session.GetObject<User>("usuario");
+}
+
+<div class="container text-center">
+
+    <h1>Hola, @usuario.Nombre</h1>
+    <p>En esta pagina tendra las opciones basicas de su usuario.</p>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a class="nav-item"
+               asp-controller="Peliculas"
+               asp-action="Favoritas">
+                Favoritas
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a class="nav-item"
+               asp-controller="Usuarios"
+               asp-action="RecuperarContrasenia">
+                Cambiar Contraseña
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a class="nav-item"
+               asp-controller="Usuarios"
+               asp-action="LogOut">
+                Cerrar Session
+            </a>
+        </li>
+    </ul>
+</div>
+

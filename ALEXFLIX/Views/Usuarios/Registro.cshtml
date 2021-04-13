@@ -1,0 +1,80 @@
+﻿<h2 style="color:red">@ViewData["MENSAJE"]</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+
+                <form class="form-horizontal needs-validation" method="post" action="#">
+
+                    <div class="form-group">
+                        <label for="validationCustomUsername">Usuario</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">@@</span>
+                            </div>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Nombre</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="nombre" id="nombre" required/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Correo</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="correo" id="correo" required/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Fecha Nacimiento</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" required/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Introduce tu Contraseña" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirma la Contraseña" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    </div>
+                    <div class="login-register">
+                        <a asp-controller="Usuarios" asp-action="Perfil">Login</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

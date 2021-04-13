@@ -1,0 +1,27 @@
+﻿@if (Context.User.Identity.IsAuthenticated)
+{
+    @if (User.FindFirst(ClaimTypes.Role).Value == "ADMIN")
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMINISTRADOR</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item"
+                   asp-controller="Usuarios"
+                   asp-action="ListUsers">
+                    Lista de usuarios
+                </a>
+                <a class="dropdown-item"
+                   asp-controller="Peliculas"
+                   asp-action="List">
+                    Lista de peliculas
+                </a>
+                <a class="dropdown-item"
+                   asp-controller="Peliculas"
+                   asp-action="Create">
+                    Crear Peliculas
+                </a>
+            </div>
+        </li>
+
+    }
+}

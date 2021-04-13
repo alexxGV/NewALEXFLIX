@@ -1,0 +1,20 @@
+﻿@model User
+
+<div class="text-center">
+    <h1>Cambiar contrasenia de @Model.Nombre</h1>
+    <h5>Debe poner el correo de su usuario y se le enviara un codigo de seguridad</h5>
+
+    <h2 style="color:red">@ViewData["MENSAJE"]</h2>
+
+    <form method="post">
+        <input type="text" name="idusuario" class="form-control" value="@Model.IdUsuario" hidden />
+
+        <label>Correo del usuario</label>
+        <input type="text" name="correo" class="form-control" />
+        <br />
+
+        <button type="submit" class="btn btn-success">
+            Enviar mensaje
+        </button>
+    </form>
+</div>
